@@ -1,4 +1,4 @@
-FROM openjdk:25-jdk-slim
+FROM eclipse-temurin:25-jre-jammy
 WORKDIR /app
 COPY src /app/src
 RUN echo "Main-Class: GoogleJavaFormatter" > manifest.txt
