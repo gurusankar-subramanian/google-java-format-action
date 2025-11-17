@@ -1,4 +1,4 @@
-FROM openjdk:17-jdk-slim
+FROM openjdk:25-jdk-slim
 WORKDIR /app
 COPY src /app/src
 RUN echo "Main-Class: GoogleJavaFormatter" > manifest.txt
