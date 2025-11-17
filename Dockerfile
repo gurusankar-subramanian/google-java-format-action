@@ -1,6 +1,6 @@
 FROM eclipse-temurin:25.0.1_8-jdk-noble
 WORKDIR /app
-COPY src/GoogleJavaFormatter.java /app/
+COPY GoogleJavaFormatter.java .
 
 RUN echo "Main-Class: GoogleJavaFormatter" > manifest.txt
 RUN javac GoogleJavaFormatter.java && \
