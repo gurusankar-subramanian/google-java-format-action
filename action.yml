@@ -1,0 +1,28 @@
+name: "Java Formatter (google-java-format)"
+description: "Format Java code using google-java-format dynamically"
+author: guru.subramanian
+
+inputs:
+  gjf-version:
+    description: "google-java-format version to use"
+    required: true
+    default: "1.22.0"
+
+  aosp:
+    description: "Use AOSP styling (true/false)"
+    required: false
+    default: "true"
+
+  paths:
+    description: "list of directories to format (Space separated)"
+    required: false
+    default: "src"
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
+
+  args:
+    - ${{ inputs.gjf-version }}
+    - ${{ inputs.aosp }}
+    - ${{ inputs.paths }}

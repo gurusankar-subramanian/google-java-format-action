@@ -1,0 +1,16 @@
+name: Test Java Formatter Action
+on: [workflow_dispatch]
+
+jobs:
+  format-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Google Java Formatter
+        uses: ./
+        with:
+          gjf-version: '1.22.0'
+          aosp: 'true'
+          paths: 'src'
