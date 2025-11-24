@@ -29,3 +29,7 @@ jobs:
       - name: Run formatter runner
         run: |
           java -cp out GoogleJavaFormatter 1.28.0 true src
+
+      - name: print diff
+        run: |
+          git diff
