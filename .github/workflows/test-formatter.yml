@@ -22,12 +22,12 @@ jobs:
           java-version: 21
 
       - name: Build formatter runner
-        working-directory: formatter-runner
+        working-directory: google-java-format-action
         run: |
           mkdir -p out
           javac -d out $(find src -name "*.java")
 
       - name: Run formatter runner
-        working-directory: formatter-runner/out
+        working-directory: google-java-format-action
         run: |
           java Runner "${{ inputs.path }}"
