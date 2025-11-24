@@ -15,6 +15,7 @@ public class GoogleJavaFormatter {
     public static void main(String[] args) throws Exception {
 
         String version = args[0];
+        logger.info("running google java format >>> ");
         logger.info("version >>> " + version);
         boolean useAosp = Boolean.parseBoolean(args[1]);
         String[] folders = args[2].split("\\s+");
