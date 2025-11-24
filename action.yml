@@ -6,7 +6,7 @@ inputs:
   gjf-version:
     description: "google-java-format version to use"
     required: true
-    default: "1.22.0"
+    default: "1.28.0"
 
   aosp:
     description: "Use AOSP styling (true/false)"

@@ -11,6 +11,12 @@ jobs:
       - name: Run Google Java Formatter
         uses: ./
         with:
-          gjf-version: '1.22.0'
+          gjf-version: '1.28.0'
           aosp: 'true'
           paths: 'src'
+#      - name: Debug Formatter
+#        uses: ./
+#        with:
+#          arg1: ""
+#          arg2: ""
+#          arg3: ""
