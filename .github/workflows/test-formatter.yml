@@ -14,9 +14,20 @@ jobs:
           gjf-version: '1.28.0'
           aosp: 'true'
           paths: 'src'
-#      - name: Debug Formatter
-#        uses: ./
-#        with:
-#          arg1: ""
-#          arg2: ""
-#          arg3: ""
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Build formatter runner
+        working-directory: formatter-runner
+        run: |
+          mkdir -p out
+          javac -d out $(find src -name "*.java")
+
+      - name: Run formatter runner
+        working-directory: formatter-runner/out
+        run: |
+          java Runner "${{ inputs.path }}"
