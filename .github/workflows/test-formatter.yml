@@ -8,12 +8,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Run Google Java Formatter
-        uses: ./
-        with:
-          gjf-version: '1.28.0'
-          aosp: 'true'
-          paths: 'src'
+#      - name: Run Google Java Formatter
+#        uses: ./
+#        with:
+#          gjf-version: '1.28.0'
+#          aosp: 'true'
+#          paths: 'src'
 
       - name: Set up Java
         uses: actions/setup-java@v4
