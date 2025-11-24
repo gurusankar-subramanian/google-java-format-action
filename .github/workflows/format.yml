@@ -1,4 +1,4 @@
-name: Test Java Formatter Action
+name: Java Formatter Action
 on:
   workflow_dispatch:
     inputs:
