@@ -1,9 +1,16 @@
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
@@ -47,7 +54,8 @@ public class GoogleJavaFormatter {
         }
     }
 
-    private static void downloadFormatterJar(String version) throws IOException {
+    private static void downloadFormatterJar(String version)
+            throws IOException, InterruptedException {
         Path jarPath = Paths.get(JAR_NAME);
 
         // Only download if not already present
@@ -62,9 +70,38 @@ public class GoogleJavaFormatter {
                         version, version);
 
         logger.info("Downloading google-java-format version " + version);
-        try (InputStream in = new URL(downloadUrl).openStream()) {
+        /*try (InputStream in = new URL(downloadUrl).openStream()) {
             Files.copy(in, jarPath);
+        }*/
+
+        downloadFile(downloadUrl);
+    }
+
+    public static void downloadFile(String urlString)
+            throws IOException {
+        URI uri = URI.create(urlString);
+        HttpURLConnection connection = getHttpURLConnection(uri);
+        try (InputStream in = connection.getInputStream()) {
+            Files.copy(in, Paths.get(JAR_NAME), StandardCopyOption.REPLACE_EXISTING);
+        } finally {
+            connection.disconnect();
         }
+    }
+
+    private static HttpURLConnection getHttpURLConnection (URI uri)
+            throws IOException {
+        URL url = uri.toURL();
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+        // Set connection and read timeouts to prevent infinite blocking
+        connection.setConnectTimeout(5000); // 5 seconds
+        connection.setReadTimeout(10000);   // 10 seconds
+
+        // Ensure the connection is successful (HTTP 200 OK)
+        if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+            throw new IOException("Server returned non-OK response: " + connection.getResponseCode() + " " + connection.getResponseMessage());
+        }
+        return connection;
     }
 
     private static void formatFile(Path file, boolean aosp) {
