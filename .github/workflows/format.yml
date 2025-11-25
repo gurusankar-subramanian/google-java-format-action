@@ -7,7 +7,7 @@ on:
       gjf-version:
         description: "Google java format version"
         required: true
-        default: latest
+        default: '1.28.0'
       asop:
         description: "Use ASOP style"
         required: true
@@ -49,5 +49,5 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes"
           else
-            git commit -m "style(checkstyle): formatted Java files"
+            git commit -m "Automated changes"
             git push
