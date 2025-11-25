@@ -46,7 +46,7 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
-          if ! git diff --cached --quiet -- '*.java'; then
+          if ! git diff-index HEAD; then
             echo "No relevant changes to commit. Skipping commit/push."
           else
             echo "Changes found. Committing and pushing."
