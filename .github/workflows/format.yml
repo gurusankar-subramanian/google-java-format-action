@@ -11,7 +11,7 @@ on:
         required: true
         default: true
       src-path:
-        description: "Use ASOP style"
+        description: "src path"
         required: true
         default: src
 
@@ -40,7 +40,6 @@ jobs:
           java -cp out GoogleJavaFormatter ${{ inputs.gjf-version }} ${{ inputs.asop }} ${{ inputs.src-path }}
 
       - name: Commit formatting changes
-        shell: bash
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
