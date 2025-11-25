@@ -1,4 +1,6 @@
 name: Java Formatter Action
+permissions:
+  contents: write
 on:
   workflow_dispatch:
     inputs:
