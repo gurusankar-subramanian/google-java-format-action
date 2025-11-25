@@ -45,13 +45,12 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          echo "google-java-format.jar" >> .gitignore
           
           if ! git diff --cached --quiet -- '*.java'; then
             echo "No relevant changes to commit. Skipping commit/push."
           else
             echo "Changes found. Committing and pushing."
-            git add '*.java'
+            git add *.java
             git commit -m "chore(formatting): format changes"
             git push
           fi
